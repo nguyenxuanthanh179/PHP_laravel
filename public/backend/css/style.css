@@ -13,6 +13,10 @@ a{
     line-height: 60px;
     color: #fff;
 }
+.d-flex{
+    display: flex;
+    justify-content: center;
+}
 .flex{
     display: flex;
     justify-content: space-between;
@@ -279,9 +283,14 @@ footer > a{
     height: 80px;
     text-align: center;
 }
+.remove {
+    background-color: #e94a4a;
+    padding: 11px;
+    margin-left: 3px;
+}
 .alert-success {
-    color: #155724;
-    background-color: #d4edda;
+    color: #fff;
+    background-color: #6ec681;
     border-color: #c3e6cb;
 }
 .alert {
@@ -293,7 +302,7 @@ footer > a{
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    animation: success ease-out 4s;
+    animation: success ease-out 2s;
 }
 @keyframes success {
     from{

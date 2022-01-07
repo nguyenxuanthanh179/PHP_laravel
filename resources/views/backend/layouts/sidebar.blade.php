@@ -17,19 +17,19 @@
     <ul class="menu">
         <li class="menu__item">
             <i class="far fa-folder-open"></i>
-            <a href="" class="menu__item-link">Manage Faculties</a>
+            <a href="" class="menu__item-link">Faculty management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-user"></i>
-            <a href="" class="menu__item-link">Manage Students</a>
+            <a href="" class="menu__item-link">Student management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-book"></i>
-            <a href="" class="menu__item-link">Manage Subjects</a>
+            <a href="" class="menu__item-link">Subject management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-print"></i>
-            <a href="" class="menu__item-link">Manage Points</a>
+            <a href="" class="menu__item-link">Point management</a>
         </li>
     </ul>
 </div>

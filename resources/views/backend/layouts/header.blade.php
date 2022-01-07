@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-4">
             <h3 class="bg-color">
-                Students Management
+                Management
             </h3>
         </div>
         <div class="col-8">

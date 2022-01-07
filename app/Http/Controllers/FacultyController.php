@@ -1,11 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Faculty;
+use App\Models\Faculty;
+use App\Repositories\Faculties\FacultyRepository;
 use Illuminate\Http\Request;
 
 class FacultyController extends Controller
 {
+    protected $facultyRepo;
+
+    public function __construct(FacultyRepository $facultyRepo)
+    {
+        $this->facultyRepo = $facultyRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,10 +20,10 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $data = Faculty::paginate(8);
-        return view('backend.faculty.index', [
-            'data' => $data
-        ]);    }
+        $faculty = Faculty::paginate(8);
+
+        return view('backend.faculties.index', compact('faculty'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +32,7 @@ class FacultyController extends Controller
      */
     public function create()
     {
-        return view('backend.faculty.create');
+        return view('backend.faculties.create');
     }
 
     /**
@@ -36,17 +43,13 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-
-        $factory = new Faculty();
-        $factory->name = $request->input('name');
         $request->validate([
             'name' => 'required|unique:faculties|max:50',
         ]);
-        //lưu
-        $factory->save();
+        $data = $request->all();
+        $this->facultyRepo->create($data);
 
         return redirect()->route('faculty.index')->with('success', 'Create success');
-
     }
 
     /**
@@ -68,12 +71,9 @@ class FacultyController extends Controller
      */
     public function edit($id)
     {
+        $faculty = $this->facultyRepo->find($id);
 
-        $faculty = Faculty::findorFail($id);
-
-        return view('backend.faculty.edit',[
-            'data'=>$faculty
-        ]);
+        return view('backend.faculties.edit', compact('faculty'));
     }
 
     /**
@@ -85,16 +85,13 @@ class FacultyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $faculty = Faculty::findorFail($id);
-        $faculty->name = $request->input('name');
         $request->validate([
             'name' => 'required|unique:faculties|max:50',
         ]);
-        //lưu
-        $faculty->save();
-        //chuyển hướng trang về trang danh sách
-        return redirect()->route('faculty.index');
+        $faculty = $request->all();
+        $this->facultyRepo->update($id, $faculty);
 
+        return redirect()->route('faculty.index');
     }
 
     /**
@@ -105,8 +102,8 @@ class FacultyController extends Controller
      */
     public function destroy($id)
     {
-        $faculty = Faculty::findorFail($id);
-        $faculty->delete();
+        $this->facultyRepo->delete($id);
+
         return redirect()->route('faculty.index');
     }
 }

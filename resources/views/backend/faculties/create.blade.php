@@ -3,25 +3,25 @@
 @section('content')
     <div class="content col-8">
         <div class="row flex">
-            <h2>Edit information</h2>
+            <h2>Add Faculty</h2>
         </div>
         <div class="table">
-            <form role="form" action="{{route('faculty.update',[$data->id])}}" method="post" enctype="multipart/form-data" >
-                {{csrf_field()}}
+                {{ Form::open(['method'=>'POST', 'route' => 'faculty.store' ]) }}
                 <div class="row form-group">
                     <div class="col">
-                        <label for="name" >Name</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{$data->name}}">
-                        @if ($errors->has('name'))
+                        {{ Form::label('', 'Name') }}
+                        {{ Form::text('name','', ['class' => 'form-control']) }}
+                        @if ( $errors->has('name') )
                             <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('name') }}</span>
                         @endif
                     </div>
 
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                {{ Form::submit('Add', ['class' => 'btn btn-primary']) }}
                 <a href="{{ route('faculty.index') }}" class="btn btn-default btn-primary">Cancel</a>
-            </form>
+                {{ Form::close() }}
         </div>
     </div>
     </main>
+
 @endsection
