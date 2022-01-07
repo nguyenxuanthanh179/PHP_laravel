@@ -9,10 +9,16 @@
             <form role="form" action="{{ route('faculty.store') }}" method="post">
                 @csrf
                 <div class="row form-group">
+
                     <div class="col">
                         <label for="name" >Name</label>
                         <input type="text" name="name" id="name" class="form-control" value="">
+                        @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('name') }}</span>
+                        @endif
+
                     </div>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Tạo</button>
                 <a href="{{route('faculty.index')}}" class="btn btn-default btn-primary" style="border:1px solid #ccc">Cancel</a>

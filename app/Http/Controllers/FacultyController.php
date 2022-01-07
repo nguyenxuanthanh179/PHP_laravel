@@ -36,13 +36,17 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
+
         $factory = new Faculty();
         $factory->name = $request->input('name');
+        $request->validate([
+            'name' => 'required|unique:faculties|max:50',
+        ]);
         //lưu
         $factory->save();
 
-        //chuyển hướng trang về trang danh sách
-        return redirect()->route('faculty.index');
+        return redirect()->route('faculty.index')->with('success', 'Create success');
+
     }
 
     /**
@@ -83,6 +87,9 @@ class FacultyController extends Controller
     {
         $faculty = Faculty::findorFail($id);
         $faculty->name = $request->input('name');
+        $request->validate([
+            'name' => 'required|unique:faculties|max:50',
+        ]);
         //lưu
         $faculty->save();
         //chuyển hướng trang về trang danh sách

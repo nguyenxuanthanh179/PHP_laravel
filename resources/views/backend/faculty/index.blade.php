@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="content col-8">
+        @if (session('success'))
+            <div class="alert alert-success" >
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="row flex">
             <h2>List of Faculties</h2>
             <a class="content__add" href="{{ route('faculty.create') }}">

@@ -12,7 +12,11 @@
                     <div class="col">
                         <label for="name" >Name</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{$data->name}}">
+                        @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('name') }}</span>
+                        @endif
                     </div>
+
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">Save</button>
                 <a href="{{ route('faculty.index') }}" class="btn btn-default btn-primary">Cancel</a>
