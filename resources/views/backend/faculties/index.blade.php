@@ -1,28 +1,23 @@
 @extends('backend.layouts.main')
 
 @section('content')
-    <div class="content col-8">
+    <div class="content col-10">
         @if (session('success'))
-            <div class="alert alert-success" >
-                {{ session('success') }}
-            </div>
+            <div class="alert alert-success" >{{ session('success') }}</div>
         @endif
         <div class="row flex">
             <h2>Faculty List</h2>
-            <a class="content__add" href="{{ route('faculties.create') }}">
-                <i class="fas fa-plus plus"></i>
-                Add
-            </a>
+            <a class="content__add" href="{{ route('faculties.create') }}"><i class="fas fa-plus plus"></i> Add New</a>
         </div>
         <div class="table">
             <table >
                 <thead class="table__header">
                 <tr class="header__title">
-                    <th style="width:40px">STT</th>
-                    <th style="width:150px">Name</th>
-                    <th style="width:80px">Date Created</th>
-                    <th style="width:100px">Date Updated</th>
-                    <th style="width:100px">Options</th>
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th>Options</th>
                 </tr>
                 </thead>
                 <tbody class="table__body">
@@ -44,7 +39,7 @@
             </table>
         </div>
         <div class="pagination">
-                {{ $faculties->links() }}
+            {{ $faculties->links() }}
         </div>
     </div>
     </main>

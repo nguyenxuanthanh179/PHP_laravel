@@ -1,4 +1,4 @@
-<div class="sidebar col-4">
+<div class="sidebar col-2">
     <div class="row al-items">
         <div>
             <a class="info__item-img info__item">

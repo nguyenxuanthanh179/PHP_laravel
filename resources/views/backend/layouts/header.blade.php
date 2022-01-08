@@ -1,11 +1,11 @@
 <header class="header">
     <div class="row">
-        <div class="col-4">
+        <div class="col-2">
             <h3 class="bg-color">
                 Management
             </h3>
         </div>
-        <div class="col-8">
+        <div class="col-10">
             <div class="row flex">
                 <div class= "icon-bars">
                     <i class="fas fa-bars"></i>
