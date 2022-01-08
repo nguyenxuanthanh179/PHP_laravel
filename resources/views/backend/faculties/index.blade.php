@@ -9,7 +9,7 @@
         @endif
         <div class="row flex">
             <h2>Faculty List</h2>
-            <a class="content__add" href="{{ route('faculty.create') }}">
+            <a class="content__add" href="{{ route('faculties.create') }}">
                 <i class="fas fa-plus plus"></i>
                 Add
             </a>
@@ -26,15 +26,15 @@
                 </tr>
                 </thead>
                 <tbody class="table__body">
-                @foreach( $faculty as $key => $item )
+                @foreach( $faculties as $key => $item )
                     <tr class="">
-                        <td align="center">{{ $faculty->firstItem() + $key }}</td>
+                        <td align="center">{{ $faculties->firstItem() + $key }}</td>
                         <td >{{ $item->name }}</td>
                         <td align="center">{{ $item->created_at }}</td>
                         <td align="center">{{ $item->updated_at }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('faculty.edit', [$item->id]) }}" class="button"><i class="far fa-edit"></i></a>
-                            {{ Form::open(['method'=>'DELETE', 'route' => ['faculty.destroy', $item->id ]]) }}
+                            <a href="{{ route('faculties.edit', [$item->id]) }}" class="button"><i class="far fa-edit"></i></a>
+                            {{ Form::open(['method'=>'DELETE', 'route' => ['faculties.destroy', $item->id ]]) }}
                                 <button onclick="return confirm('Are you sure you want to delete this entry?')" class="button remove"><i class="far fa-trash-alt "></i> </button>
                             {{ Form::close() }}
                         </td>
@@ -44,7 +44,7 @@
             </table>
         </div>
         <div class="pagination">
-                {{ $faculty->links() }}
+                {{ $faculties->links() }}
         </div>
     </div>
     </main>

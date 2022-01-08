@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Faculty;
-use App\Repositories\Faculties\FacultyRepository;
+use App\Repositories\Faculties\FacultyRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 
 class FacultyController extends Controller
 {
     protected $facultyRepo;
 
-    public function __construct(FacultyRepository $facultyRepo)
+    public function __construct(FacultyRepositoryInterface $facultyRepo)
     {
         $this->facultyRepo = $facultyRepo;
     }
@@ -20,9 +20,9 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $faculty = Faculty::paginate(8);
+        $faculties = $this->facultyRepo->getFaculty();
 
-        return view('backend.faculties.index', compact('faculty'));
+        return view('backend.faculties.index', compact('faculties'));
     }
 
     /**
@@ -41,15 +41,11 @@ class FacultyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:faculties|max:50',
-        ]);
-        $data = $request->all();
-        $this->facultyRepo->create($data);
+        $this->facultyRepo->create($request->all());
 
-        return redirect()->route('faculty.index')->with('success', 'Create success');
+        return redirect()->route('faculties.index')->with('success', 'Create success');
     }
 
     /**
@@ -83,15 +79,11 @@ class FacultyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RegisterRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|unique:faculties|max:50',
-        ]);
-        $faculty = $request->all();
-        $this->facultyRepo->update($id, $faculty);
+        $this->facultyRepo->update($id, $request->all());
 
-        return redirect()->route('faculty.index');
+        return redirect()->route('faculties.index');
     }
 
     /**
@@ -104,6 +96,6 @@ class FacultyController extends Controller
     {
         $this->facultyRepo->delete($id);
 
-        return redirect()->route('faculty.index');
+        return redirect()->route('faculties.index');
     }
 }
