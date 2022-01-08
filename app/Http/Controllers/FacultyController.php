@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Repositories\Faculties\FacultyRepositoryInterface;
-use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 
 class FacultyController extends Controller
