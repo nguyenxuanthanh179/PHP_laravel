@@ -36,7 +36,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getLimit($int)
     {
-        return $this->model->paginate($int);
+        return $this->model->orderByDesc('id')->paginate($int);
     }
 
     public function find($id)
