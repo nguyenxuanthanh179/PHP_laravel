@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Repositories\Faculties\FacultyRepositoryInterface;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\FacultyRequest;
 
 class FacultyController extends Controller
 {
@@ -19,7 +19,7 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $faculties = $this->facultyRepo->getFaculty();
+        $faculties = $this->facultyRepo->getLimit(8);
 
         return view('backend.faculties.index', compact('faculties'));
     }
@@ -40,7 +40,7 @@ class FacultyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function store(FacultyRequest $request)
     {
         $this->facultyRepo->create($request->all());
 
@@ -78,7 +78,7 @@ class FacultyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegisterRequest $request, $id)
+    public function update(FacultyRequest $request, $id)
     {
         $this->facultyRepo->update($id, $request->all());
 

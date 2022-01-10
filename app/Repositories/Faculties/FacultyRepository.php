@@ -13,6 +13,6 @@ class FacultyRepository extends BaseRepository implements FacultyRepositoryInter
 
     public function getFaculty()
     {
-        return $this->model->paginate(8);
+//        $this->model->getLimit(8);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\RepostoryInterface;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -28,9 +28,15 @@ abstract class BaseRepository implements RepositoryInterface
         );
     }
 
+
     public function getAll()
     {
         return $this->model->all();
+    }
+
+    public function getLimit($int)
+    {
+        return $this->model->paginate($int);
     }
 
     public function find($id)

@@ -8,6 +8,8 @@ interface RepositoryInterface
      * Get all
      * @return mixed
      */
+    public function getLimit($int);
+
     public function getAll();
 
     /**
