@@ -33,13 +33,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $subjects = new Subject();
-        $method = 'POST';
-        $array = [
-            'route' => 'subjects.store',
-            'id' => ''
-        ];
-        return view('backend.subjects.createUpdate', compact('subjects', 'method', 'array'));
+        $subject = new Subject();
+
+        return view('backend.subjects.create_update', compact('subject'));
     }
 
     /**
@@ -74,13 +70,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        $subjects = $this->subjectRepo->find($id);
-        $method = 'PATCH';
-        $array = [
-            'route' => 'subjects.update',
-            'id' => $id
-        ];
-        return view('backend.subjects.createUpdate', compact('subjects', 'method', 'array'));
+        $subject = $this->subjectRepo->find($id);
+
+        return view('backend.subjects.create_update', compact('subject'));
     }
 
     /**
