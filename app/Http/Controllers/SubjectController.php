@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Subject;
+use App\Repositories\Subjects\SubjectRepositoryInterface;
+use App\Http\Requests\SubjectRequest;
+
+class SubjectController extends Controller
+{
+    protected $subjectRepo;
+
+    public function __construct(SubjectRepositoryInterface $subjectRepo)
+    {
+        $this->subjectRepo = $subjectRepo;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $subjects = $this->subjectRepo->getLimit(8);
+
+        return view('backend.subjects.index', compact('subjects'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $subjects = new Subject();
+        $method = 'POST';
+        $array = [
+            'route' => 'subjects.store',
+            'id' => ''
+        ];
+        return view('backend.subjects.createUpdate', compact('subjects', 'method', 'array'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(SubjectRequest  $request)
+    {
+        $this->subjectRepo->create($request->all());
+
+        return redirect()->route('subjects.index')->with('success', 'Create success');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $subjects = $this->subjectRepo->find($id);
+        $method = 'PATCH';
+        $array = [
+            'route' => 'subjects.update',
+            'id' => $id
+        ];
+        return view('backend.subjects.createUpdate', compact('subjects', 'method', 'array'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(SubjectRequest  $request, $id)
+    {
+        $this->subjectRepo->update($id, $request->all());
+
+        return redirect()->route('subjects.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->subjectRepo->delete($id);
+
+        return redirect()->route('subjects.index');
+    }
+}
