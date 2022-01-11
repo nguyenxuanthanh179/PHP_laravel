@@ -29,7 +29,7 @@
                         <td align="center">{{ $item->updated_at }}</td>
                         <td class="d-flex">
                             <a href="{{ route('faculties.edit', [$item->id]) }}" class="button"><i class="far fa-edit"></i></a>
-                            {{ Form::open(['method'=>'DELETE', 'route' => ['faculties.destroy', $item->id ]]) }}
+                            {{ Form::model($item, ['method'=>'DELETE', 'route' => ['faculties.destroy', $item->id]]) }}
                                 <button onclick="return confirm('Are you sure you want to delete this entry?')" class="button remove"><i class="far fa-trash-alt "></i> </button>
                             {{ Form::close() }}
                         </td>
