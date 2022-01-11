@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('faculties', FacultyController::class);
+Route::resource('subjects', SubjectController::class);
