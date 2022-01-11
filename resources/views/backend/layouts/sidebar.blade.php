@@ -17,7 +17,7 @@
     <ul class="menu">
         <li class="menu__item">
             <i class="far fa-folder-open"></i>
-            <a href="" class="menu__item-link">Faculty management</a>
+            <a href="{{ route('faculties.index') }}" class="menu__item-link">Faculty management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-user"></i>
@@ -25,7 +25,7 @@
         </li>
         <li class="menu__item">
             <i class="fas fa-book"></i>
-            <a href="" class="menu__item-link">Subject management</a>
+            <a href="{{ route('subjects.index') }}" class="menu__item-link">Subject management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-print"></i>
