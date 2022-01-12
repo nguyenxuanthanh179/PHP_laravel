@@ -21,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Subjects\SubjectRepositoryInterface::class,
             \App\Repositories\Subjects\SubjectRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Students\StudentRepositoryInterface::class,
+            \App\Repositories\Students\StudentRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Marks\MarkRepositoryInterface::class,
+            \App\Repositories\Marks\MarkRepository::class
+        );
     }
 
     /**
