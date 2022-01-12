@@ -24,8 +24,8 @@ class MarkRequest extends FormRequest
     public function rules()
     {
         return [
-            'mark' => 'required|numeric',
-            'subject_id' => 'required',
+            'mark' => 'required|numeric|between:0,10',
+            'subject_id' => 'required|unique:marks',
             'student_id' => 'required',
         ];
     }
