@@ -13,6 +13,6 @@ class FacultyRepository extends BaseRepository implements FacultyRepositoryInter
 
     public function getFaculty()
     {
-//        $this->model->getLimit(8);
+
     }
 }
