@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Faculty;
+
 use App\Repositories\Faculties\FacultyRepositoryInterface;
 use App\Http\Requests\FacultyRequest;
 
@@ -32,7 +32,7 @@ class FacultyController extends Controller
      */
     public function create()
     {
-        $faculty = new Faculty();
+        $faculty = $this->facultyRepo->newModel();
 
         return view('backend.faculties.create_update', compact('faculty'));
     }
@@ -69,7 +69,7 @@ class FacultyController extends Controller
      */
     public function edit($id)
     {
-        $faculty = $this->facultyRepo->find($id);
+        $faculty = $this->facultyRepo->findOrFail($id);
 
         return view('backend.faculties.create_update', compact('faculty'));
     }

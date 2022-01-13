@@ -8,8 +8,8 @@ interface RepositoryInterface
      * Get all
      * @return mixed
      */
-    public function getLimit($int);
-
+    public function getLimit($number);
+    public function newModel();
     public function getAll();
 
     /**
@@ -17,7 +17,7 @@ interface RepositoryInterface
      * @param $id
      * @return mixed
      */
-    public function find($id);
+    public function findOrFail($id);
 
     /**
      * Create

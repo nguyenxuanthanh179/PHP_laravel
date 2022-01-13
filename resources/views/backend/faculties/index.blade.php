@@ -12,24 +12,24 @@
         <div class="table">
             <table >
                 <thead class="table__header">
-                <tr class="header__title">
-                    <th>STT</th>
-                    <th>Name</th>
-                    <th>Date Created</th>
-                    <th>Date Updated</th>
-                    <th>Options</th>
-                </tr>
+                    <tr class="header__title">
+                        <th>STT</th>
+                        <th>Name</th>
+                        <th>Date Created</th>
+                        <th>Date Updated</th>
+                        <th>Options</th>
+                    </tr>
                 </thead>
                 <tbody class="table__body">
-                @foreach( $faculties as $key => $item )
+                @foreach( $faculties as $key => $faculty )
                     <tr class="">
                         <td align="center">{{ $faculties->firstItem() + $key }}</td>
-                        <td >{{ $item->name }}</td>
-                        <td align="center">{{ $item->created_at }}</td>
-                        <td align="center">{{ $item->updated_at }}</td>
+                        <td >{{ $faculty->name }}</td>
+                        <td align="center">{{ $faculty->created_at }}</td>
+                        <td align="center">{{ $faculty->updated_at }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('faculties.edit', [$item->id]) }}" class="button"><i class="far fa-edit"></i></a>
-                            {{ Form::model($item, ['method'=>'DELETE', 'route' => ['faculties.destroy', $item->id]]) }}
+                            <a href="{{ route('faculties.edit', $faculty->id) }}" class="button"><i class="far fa-edit"></i></a>
+                            {{ Form::model($faculty, ['method'=>'DELETE', 'route' => ['faculties.destroy', $faculty->id]]) }}
                                 <button onclick="return confirm('Are you sure you want to delete this entry?')" class="button remove"><i class="far fa-trash-alt "></i> </button>
                             {{ Form::close() }}
                         </td>
@@ -42,5 +42,4 @@
             {{ $faculties->links() }}
         </div>
     </div>
-    </main>
 @endsection

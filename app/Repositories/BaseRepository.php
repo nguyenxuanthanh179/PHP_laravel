@@ -28,20 +28,24 @@ abstract class BaseRepository implements RepositoryInterface
         );
     }
 
+    public function newModel()
+    {
+        return new $this->model;
+    }
 
     public function getAll()
     {
         return $this->model->all();
     }
 
-    public function getLimit($int)
+    public function getLimit($number = 10)
     {
-        return $this->model->orderByDesc('id')->paginate($int);
+        return $this->model->orderByDesc('updated_at')->paginate($number);
     }
 
-    public function find($id)
+    public function findOrFail($id)
     {
-        $result = $this->model->find($id);
+        $result = $this->model->findOrFail($id);
 
         return $result;
     }
@@ -53,24 +57,16 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function update($id, $attributes = [])
     {
-        $result = $this->find($id);
-        if ($result) {
-            $result->update($attributes);
-            return $result;
-        }
+        $result = $this->findOrFail($id);
 
-        return false;
+        return $result->update($attributes);
+
     }
 
     public function delete($id)
     {
-        $result = $this->find($id);
-        if ($result) {
-            $result->delete();
+        $result = $this->findOrFail($id);
 
-            return true;
-        }
-
-        return false;
+        return $result->delete();
     }
 }
