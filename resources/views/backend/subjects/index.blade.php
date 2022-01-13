@@ -12,24 +12,24 @@
         <div class="table">
             <table >
                 <thead class="table__header">
-                <tr class="header__title">
-                    <th>STT</th>
-                    <th>Name</th>
-                    <th>Date Created</th>
-                    <th>Date Updated</th>
-                    <th>Options</th>
-                </tr>
+                    <tr class="header__title">
+                        <th>STT</th>
+                        <th>Name</th>
+                        <th>Date Created</th>
+                        <th>Date Updated</th>
+                        <th>Options</th>
+                    </tr>
                 </thead>
                 <tbody class="table__body">
-                @foreach( $subjects as $key => $item )
+                @foreach( $subjects as $key => $subject )
                     <tr class="">
                         <td align="center">{{ $subjects->firstItem() + $key }}</td>
-                        <td >{{ $item->name }}</td>
-                        <td align="center">{{ $item->created_at }}</td>
-                        <td align="center">{{ $item->updated_at }}</td>
+                        <td >{{ $subject->name }}</td>
+                        <td align="center">{{ $subject->created_at }}</td>
+                        <td align="center">{{ $subject->updated_at }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('subjects.edit', [$item->id]) }}" class="button"><i class="far fa-edit"></i></a>
-                            {{ Form::model($item, ['method'=>'DELETE', 'route' => ['subjects.destroy', $item->id]]) }}
+                            <a href="{{ route('subjects.edit', $subject->id) }}" class="button"><i class="far fa-edit"></i></a>
+                            {{ Form::model($subject, ['method'=>'DELETE', 'route' => ['subjects.destroy', $subject->id]]) }}
                                 <button onclick="return confirm('Are you sure you want to delete this entry?')" class="button remove"><i class="far fa-trash-alt "></i> </button>
                             {{ Form::close() }}
                         </td>
@@ -42,5 +42,4 @@
             {{ $subjects->links() }}
         </div>
     </div>
-    </main>
 @endsection
