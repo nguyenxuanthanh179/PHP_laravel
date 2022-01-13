@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subject;
 use App\Repositories\Subjects\SubjectRepositoryInterface;
 use App\Http\Requests\SubjectRequest;
 
@@ -33,7 +32,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $subject = new Subject();
+        $subject = $this->subjectRepo->newModel();
 
         return view('backend.subjects.create_update', compact('subject'));
     }
@@ -70,7 +69,7 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        $subject = $this->subjectRepo->find($id);
+        $subject = $this->subjectRepo->findOrFail($id);
 
         return view('backend.subjects.create_update', compact('subject'));
     }
