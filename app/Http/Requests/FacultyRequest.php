@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FacultyRequest extends FormRequest
 {
@@ -24,7 +25,11 @@ class FacultyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:faculties|max:50'
+            'name' => [
+                'required',
+                'max:50',
+                Rule::unique('faculties')->ignore($this->id)
+            ]
         ];
     }
 }
