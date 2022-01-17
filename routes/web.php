@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('faculties', FacultyController::class);
 Route::resource('subjects', SubjectController::class);
+Route::resource('students', StudentController::class);
 
+Route::delete('/students/{student}/delete', 'StudentController@delete')->name('students.delete');
+Route::get('/marks/create', 'StudentController@markCreate')->name('marks.create');
 

@@ -21,7 +21,7 @@
         </li>
         <li class="menu__item">
             <i class="fas fa-user"></i>
-            <a href="" class="menu__item-link">Student management</a>
+            <a href="{{ route('students.index') }}" class="menu__item-link">Student management</a>
         </li>
         <li class="menu__item">
             <i class="fas fa-book"></i>
