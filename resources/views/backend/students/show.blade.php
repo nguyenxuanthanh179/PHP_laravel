@@ -3,7 +3,7 @@
 @section('content')
     <div class="content col-10">
         <div class="row flex">
-            <h2>Point List</h2>
+            <h2>Mark List</h2>
         </div>
         <div class="table">
             <div class="row flex justify-content-end">
