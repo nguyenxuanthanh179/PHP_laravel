@@ -5,9 +5,7 @@ use App\Repositories\RepositoryInterface;
 
 interface StudentRepositoryInterface extends RepositoryInterface
 {
-    public function Gender();
-    public function Faculty();
-    public function Subject();
+    public function gender();
     public function createStudent($attributes);
     public function updateStudent($id, $attributes);
 }

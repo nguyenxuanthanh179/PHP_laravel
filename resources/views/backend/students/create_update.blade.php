@@ -27,8 +27,8 @@
                         @if(!empty($student->id))
                             <img src="{{asset($student->image)}}" width="80">
                         @endif
-                        @if ( $errors->has('name') )
-                            <span role="alert" style="color:red;">{{ $errors->first('name') }}</span>
+                        @if ( $errors->has('image') )
+                            <span role="alert" style="color:red;">{{ $errors->first('image') }}</span>
                         @endif
                     </div>
                     <div class="form-group">

@@ -26,7 +26,7 @@ class StudentRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:50',
-            'birthday' => 'required|date_format:Y-m-d|before:today|nullable',
+            'birthday' => 'required|date_format:Y-m-d|before:today',
             'phone_number' => [
                 'required',
                 'numeric',
@@ -36,7 +36,7 @@ class StudentRequest extends FormRequest
             'address' => 'required|max:255',
             'gender'=> 'required|between:0,1',
             'faculty_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:255'
         ];
     }
 }

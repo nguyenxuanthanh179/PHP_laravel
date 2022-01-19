@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\Models\Subject;
+use App\Repositories\Faculties\FacultyRepositoryInterface;
 use App\Repositories\Students\StudentRepositoryInterface;
 use App\Http\Requests\StudentRequest;
+use App\Repositories\Subjects\SubjectRepositoryInterface;
 
 class StudentController extends Controller
 {
     protected $studentRepo;
+    protected $subjectRepo;
+    protected $facultyRepo;
 
-    public function __construct(StudentRepositoryInterface $studentRepo)
+    public function __construct(StudentRepositoryInterface $studentRepo, SubjectRepositoryInterface $subjectRepo, FacultyRepositoryInterface $facultyRepo)
     {
         $this->studentRepo = $studentRepo;
+        $this->subjectRepo = $subjectRepo;
+        $this->facultyRepo = $facultyRepo;
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +27,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = $this->studentRepo->getLimit(8);
-        $gender = $this->studentRepo->Gender();
+        $gender = $this->studentRepo->gender();
 
         return view('backend.students.index', compact('students','gender'));
     }
@@ -36,8 +40,8 @@ class StudentController extends Controller
     public function create()
     {
         $student = $this->studentRepo->newModel();
-        $faculty = $this->studentRepo->Faculty();
-        $gender = $this->studentRepo->Gender();
+        $faculty = $this->studentRepo->arrayName($this->facultyRepo->getAll());
+        $gender = $this->studentRepo->gender();
 
         return view('backend.students.create_update', compact('student', 'gender', 'faculty'));
     }
@@ -65,7 +69,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = $this->studentRepo->findOrFail($id);
-        $subject = $this->studentRepo->Subject();
+        $subject = $this->studentRepo->arrayName($this->subjectRepo->getAll());
 
         return view('backend.students.show', compact('student','subject'));
     }
@@ -79,8 +83,8 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = $this->studentRepo->findOrFail($id);
-        $faculty = $this->studentRepo->Faculty();
-        $gender = $this->studentRepo->Gender();
+        $faculty = $this->studentRepo->arrayName($this->facultyRepo->getAll());
+        $gender = $this->studentRepo->gender();
 
         return view('backend.students.create_update', compact('faculty', 'gender', 'student'));
     }
@@ -111,20 +115,34 @@ class StudentController extends Controller
 
         return redirect(route('students.index'));
     }
-//student_subject
-    public function delete($id)
+    //student_subject
+    public function markDelete($id)
     {
-        $student = $this->studentRepo->findOrFail($id);
+        $student = $this->studentRepo->newModel();
         $student->subjects()->detach($id);
-
         return redirect(route('students.index'));
 
     }
     public function markCreate()
     {
         $student = $this->studentRepo->newModel();
-        $subject = $this->studentRepo->Subject();
+        $subject = $this->studentRepo->arrayName($this->subjectRepo->getAll());
 
         return view('backend.students.create_mark', compact('student','subject'));
     }
+
+    public function markStore()
+    {
+        $student = $this->studentRepo->newModel();
+        $student->subjects()->attach([
+            1,
+            2,
+            3
+        ], [
+            'mark' => '6',
+            'student_id' => '7',
+        ]);
+        return redirect(route('students.index'));
+    }
+
 }

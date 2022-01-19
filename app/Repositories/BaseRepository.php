@@ -69,4 +69,8 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $result->delete();
     }
+
+    public function arrayName($arrayName) {
+        return $name = $arrayName->pluck('name', 'id');
+    }
 }
