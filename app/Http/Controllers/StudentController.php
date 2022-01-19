@@ -123,14 +123,6 @@ class StudentController extends Controller
         return redirect(route('students.index'));
 
     }
-    public function markCreate()
-    {
-        $student = $this->studentRepo->newModel();
-        $subject = $this->studentRepo->arrayName($this->subjectRepo->getAll());
-
-        return view('backend.students.create_mark', compact('student','subject'));
-    }
-
     public function markStore()
     {
         $student = $this->studentRepo->newModel();
@@ -143,6 +135,11 @@ class StudentController extends Controller
             'student_id' => '7',
         ]);
         return redirect(route('students.index'));
+    }
+
+    public function markEdit($id)
+    {
+        return view('backend.students.show');
     }
 
 }

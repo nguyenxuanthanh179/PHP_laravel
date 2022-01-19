@@ -19,6 +19,7 @@ Route::resource('faculties', FacultyController::class);
 Route::resource('subjects', SubjectController::class);
 Route::resource('students', StudentController::class);
 
-Route::delete('/students/{student}/delete', 'StudentController@delete')->name('students.delete');
-Route::get('/marks/create', 'StudentController@markCreate')->name('marks.create');
+Route::delete('/marks/{marks}/delete', 'StudentController@markDelete')->name('marks.delete');
+Route::get('/marks/{marks}/edit', 'StudentController@markEdit')->name('marks.edit');
+Route::post('/marks/store', 'StudentController@markStore')->name('marks.store');
 
