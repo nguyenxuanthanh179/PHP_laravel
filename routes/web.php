@@ -23,3 +23,6 @@ Route::delete('/marks/{marks}/delete', 'StudentController@markDelete')->name('ma
 Route::get('/marks/{marks}/edit', 'StudentController@markEdit')->name('marks.edit');
 Route::post('/marks/store', 'StudentController@markStore')->name('marks.store');
 
+Route::get('/admin/login', 'AdminController@login')->name('admin.login');
+Route::post('/admin/login', 'AdminController@postLogin')->name('admin.postLogin');
+Route::get('/admin/logout', 'AdminController@logout')->name('admin.logout');
